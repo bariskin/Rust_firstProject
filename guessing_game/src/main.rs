@@ -10,6 +10,8 @@ let secret_number = rand::thread_rng().gen_range(1, 101);
 
 println!("Загаданное число: {}", secret_number);
 
+loop {
+
 println!("Пожалуйста, введите предположение.");
 
 let mut guess = String::new();
@@ -31,5 +33,5 @@ match guess.cmp(&secret_number) {            // сравнение чисел
     Ordering::Greater => println!("Слишком большое!"),
     Ordering::Equal => println!("Вы выиграли!"),
     }
-
+ }
 }
