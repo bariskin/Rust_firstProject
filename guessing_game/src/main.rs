@@ -8,7 +8,7 @@ println!("Угадайте число!");
 
 let secret_number = rand::thread_rng().gen_range(1, 101);
 
-println!("Загаданное число: {}", secret_number);
+//println!("Загаданное число: {}", secret_number);
 
 loop {
 
@@ -21,9 +21,15 @@ loop {
    .ok()
    .expect("Не удалось прочитать строку");     // io::stdin().read_line(&mut guess).ok().expect("Не удалось прочитать строку");
 
-   let guess: u32 = guess.trim().parse()       // string convert to int
-   .ok()
-   .expect("Пожалуйста, введите число!");
+   //let guess: u32 = guess.trim().parse()       // string convert to int
+   //.ok()
+   //.expect("Пожалуйста, введите число!");
+
+   let guess: u32 = match guess.trim().parse() {
+    Ok(num) => num,
+    Err(_) => continue,
+    };
+
 
    println!("Ваша попытка: {}", guess);
 
