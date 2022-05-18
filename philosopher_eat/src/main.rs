@@ -24,7 +24,7 @@ struct Philosopher {
  
 fn main() {
 
-    let philosophers = vec![                                    /* пример создание вектора */
+    let philosophers = vec![                                             /* пример создание вектора */
             Philosopher::new("Джудит Батлер"),
             Philosopher::new("Рая Дунаевская"),
             Philosopher::new("Зарубина Наталья"),
@@ -32,7 +32,14 @@ fn main() {
             Philosopher::new("Анна Шмидт"),
           ];     
 
-        for p in &philosophers {
-              p.eat();
-         }    
+    let handles: Vec<_> = philosophers.into_iter().map(|p| {
+            thread::spawn(move || {
+                    p.eat();
+            })
+        }).collect();  
+
+     for h in handles {
+              h.join().unwrap();
+            }   
+        
     }
